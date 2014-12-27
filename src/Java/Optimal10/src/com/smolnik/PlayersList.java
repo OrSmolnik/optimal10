@@ -57,7 +57,6 @@ public class PlayersList extends JFrame {
 		setTitle("Optimal10");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		getContentPane().setForeground(SystemColor.desktop);
-		goBackButton();
 		setupPanel();
 
 	}
@@ -251,7 +250,7 @@ public class PlayersList extends JFrame {
 
 	}
 	public void goBackButton(){
-		backButton = new JButton("חזרה");
+		backButton = new JButton();
 		setNewButton(backButton, "return", 0, 0);
 		getContentPane().add(backButton);
 		

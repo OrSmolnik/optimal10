@@ -56,7 +56,6 @@ public class PositionList extends JFrame {
 		setTitle("Optimal10");
 		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		getContentPane().setForeground(SystemColor.desktop);
-		goBackButton();
 		setupPanel();
 
 	}
