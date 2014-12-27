@@ -9,7 +9,6 @@ public class Run {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		First form = new First();
-		int Test = 1;
 		form.start(form);
 	}
 
