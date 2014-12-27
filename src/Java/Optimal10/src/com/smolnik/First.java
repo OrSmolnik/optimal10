@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 import java.awt.BorderLayout;
+import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.sql.Time;
@@ -40,6 +41,7 @@ public class First extends JFrame {
 		getContentPane().add(btnSelectAttributes);
 		getContentPane().add(btnPosition);
 		getContentPane().add(btnCalculate);
+		getContentPane().setBackground(SystemColor.inactiveCaptionBorder);
 		
 		btnPlayersList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -85,6 +87,7 @@ public class First extends JFrame {
 		form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		form.setSize(WINDOW_WIDTH, WINDOWS_HEIGHT);
 		form.setVisible(true);
+		
 		form.setTitle("Main Manu");
 		form.setResizable(false);
 		

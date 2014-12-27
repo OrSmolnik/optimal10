@@ -1,6 +1,9 @@
 package com.smolnik;
 
 public final class Consts {
+	public static final String PROGRAM_FILES = System.getenv("programfiles");
+	public static final String PROGRAM_FOLDER = PROGRAM_FILES + "\\Optimal10";
+	
 	//button\textfield size
 	public static final int FIELD_WIDTH = 150;
 	public static final int FIELD_HEIGHT = 30;
@@ -21,10 +24,10 @@ public final class Consts {
 	public static final int WINDOWS_HEIGHT = 500;
 	
 	//files paths
-	public static final String FILE_PATH_PLAYERS = "C:\\temp\\Players.xml";
-	public static final String FILE_PATH_POSITIONS = "C:\\temp\\Positions.xml";
-	public static final String FILE_PATH_LINEUP = "C:\\temp\\LineUp.xml";
-	public static final String FILE_PATH_ATTRIBUTES = "C:\\temp\\Attributes.xml";
+	public static final String FILE_PATH_PLAYERS = PROGRAM_FOLDER + "\\Players.xml";
+	public static final String FILE_PATH_POSITIONS = PROGRAM_FOLDER + "\\Positions.xml";
+	public static final String FILE_PATH_LINEUP = PROGRAM_FOLDER + "\\LineUp.xml";
+	public static final String FILE_PATH_ATTRIBUTES = PROGRAM_FOLDER + "\\Attributes.xml";
 	
 	//PlayerList 
 	public static final String PLAYER_LIST_ROOT_ELEMENT = "Players";
@@ -51,7 +54,7 @@ public final class Consts {
 	public static final int XML_TYPE_ATTRIBUTES = 2;
 	
 	//Logger
-	public static final String LOG_FILE = "C:\\temp\\log.txt";
+	public static final String LOG_FILE = PROGRAM_FOLDER + "\\log.txt";
 	
 	
 
