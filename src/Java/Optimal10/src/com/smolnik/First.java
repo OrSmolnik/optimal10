@@ -4,9 +4,13 @@ import static com.smolnik.Consts.*;
 
 import javax.swing.JFrame;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.Time;
+
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
@@ -20,6 +24,8 @@ public class First extends JFrame {
 	private JButton btnPosition = new JButton();
 	private JButton btnSelectAttributes = new JButton();
 	private JButton btnCalculate = new JButton();
+	private String resultString;
+	
 	public First() {
 		getContentPane().setLayout(null);
 		
@@ -63,9 +69,11 @@ public class First extends JFrame {
 			}
 		});
 		
+		
 		btnCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Calculations.Calculate();
+				resultString = Calculations.Calculate();
+				infoBox(resultString,"Result!");
 			}
 		});
 	}
@@ -86,6 +94,19 @@ public class First extends JFrame {
 		btn.setBounds(x, y, FIELD_WIDTH, FIELD_HEIGHT);
 		// btn.setBounds(x, y, 130, 30);
 		btn.setText(text);
+	}
+	
+	public static void infoBox(String infoMessage, String titleBar) {
+		MsgBox(infoMessage, titleBar, JOptionPane.INFORMATION_MESSAGE);
+	}
+	
+	public static void MsgBox(String errorMessage, String titleBar,
+			int typeOfMessage) {
+		Logger.log("msgBox: Prompet message box type - '"
+				+ typeOfMessage + "' with message - '" + errorMessage
+				+ "' and title - '" + titleBar + "'");
+		JOptionPane.showMessageDialog(null, errorMessage, titleBar,
+				typeOfMessage);
 	}
 
 	

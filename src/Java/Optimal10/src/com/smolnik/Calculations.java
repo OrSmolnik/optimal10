@@ -9,10 +9,10 @@ public class Calculations {
 		throw new AssertionError();
 	}
 	
-	public static void Calculate(){
+	public static String Calculate(){
 		if (!isXmlExist(FILE_PATH_PLAYERS) || !isXmlExist(FILE_PATH_POSITIONS)){
-			System.out.print("Calculate: TEST NOT EXIST VILE ");
-			return;
+			Logger.log("Calculate: Players XML or Position XML not exist");
+			return "";
 		}
 		XmlFile xmlFilePlayers = new XmlFile(FILE_PATH_PLAYERS, PLAYER_LIST_ROOT_ELEMENT, PLAYER_LIST_CHILD_ELEMENT);
 		XmlFile xmlFilePositions = new XmlFile(FILE_PATH_POSITIONS, POSITION_LIST_ROOT_ELEMENT, POSITION_LIST_CHILD_ELEMENT);
@@ -47,10 +47,14 @@ public class Calculations {
 //		}
 		
 		HungarianAlgorithm ha = new HungarianAlgorithm(mat);
-		int[] t = ha.execute();
-		for (int i = 0 ; i < t.length ; i++){
-			Logger.log(positions[i] + ": " + players[t[i]]);
+		String resultString = "";
+		int[] matResult = ha.execute();
+		for (int i = 0 ; i < mat.length ; i++){
+			resultString += positions[i] + ": " + players[matResult[i]] + "\n";
 		}
+		Logger.log(resultString);
+		return resultString;
+		
 //		
 //		for (int i = 0 ; i < testMat.length ; i++){
 //			for (int j = 0 ; j < testMat[i].length ; j++){
