@@ -1,36 +1,51 @@
 package com.smolnik;
 
-import static com.smolnik.Consts.*;
-import static com.smolnik.Consts.FIELD_WIDTH;
-import static com.smolnik.Consts.FILE_PATH_PLAYERS;
-import static com.smolnik.Consts.LIST_HEIGHT;
-import static com.smolnik.Consts.LIST_WIDTH;
-import static com.smolnik.Consts.PLAYER_LIST_CHILD_ELEMENT;
-import static com.smolnik.Consts.PLAYER_LIST_ROOT_ELEMENT;
-import static com.smolnik.Consts.SPACE_FROM_BORDER;
-import static com.smolnik.Consts.WINDOWS_HEIGHT;
-import static com.smolnik.Consts.WINDOW_WIDTH;
-
-import java.awt.SystemColor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import javax.swing.JFrame;
+import java.awt.Color;
+import javax.swing.JLabel;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JList;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.BoxLayout;
+import javax.swing.ListModel;
+
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.RowSpec;
+import com.jgoodies.forms.factories.FormFactory;
+import java.awt.SystemColor;
 import javax.swing.SwingConstants;
+import javax.swing.JList;
+import java.awt.Window.Type;
+import java.awt.Dialog.ModalExclusionType;
+import javax.swing.border.LineBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+
+import javax.swing.ListSelectionModel;
+
+import static com.smolnik.Consts.*;
+import com.smolnik.XmlActionas;
+import com.smolnik.Logger;
 
 public class AttributesList extends JFrame {
-	
 	private JTextField textFieldAttribute = new JTextField();;
 	private JList attributesList;
+	private DefaultListModel attributesListModel;
 	private JScrollPane attributesPane;
-	private DefaultListModel attributeListModel;
 	private JButton buttonRemoveAttribute;
 	private JButton buttonAddAttribute;
 	private JLabel labelTitle;
@@ -38,16 +53,19 @@ public class AttributesList extends JFrame {
 	private JLabel lblAttributeList;
 	private JButton backButton;
 
-	public AttributesList(int xmlType) {
+	public AttributesList() {
+		setTitle("Optimal10");
+		setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		getContentPane().setForeground(SystemColor.desktop);
 		goBackButton();
-		setupPanel(xmlType);
+		setupPanel();
 
 	}
 
-	private void setupPanel(final int xmlType) {
+	private void setupPanel() {
 		getContentPane().setBackground(SystemColor.inactiveCaptionBorder);
 		getContentPane().setLayout(null);
+		
 
 		// Initialize
 		textFieldAttribute.setBounds(WINDOW_WIDTH - FIELD_WIDTH
@@ -72,7 +90,7 @@ public class AttributesList extends JFrame {
 		buttonAddAttribute.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Logger.log("AddAttributeAction: Adding attribute");
-				boolean addResult = addItemToList(attributeListModel,
+				boolean addResult = addItemToList(attributesListModel,
 						textFieldAttribute);
 				if (addResult) {
 					System.out
@@ -85,14 +103,14 @@ public class AttributesList extends JFrame {
 
 		buttonRemoveAttribute.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Logger.log("RemoveAtributeAction: Removing attribute");
+				Logger.log("RemoveAttributeAction: Removing Attribute");
 				boolean addResult = listRemoveSelectedItem(attributesList);
 				if (addResult) {
 					System.out
-							.println("RemoveAtributeAction: Attribute removed successfully");
+							.println("RemoveAttributeAction: Attribute removed successfully");
 				} else {
 					System.out
-							.println("RemoveAtributeAction: Could not remove attribute");
+							.println("RemoveAttributeAction: Could not remove Attribute");
 				}
 
 			}
@@ -100,20 +118,20 @@ public class AttributesList extends JFrame {
 
 		buttonSave.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Logger.log("SaveAttributeAction: Saving attributes");
+				Logger.log("SaveAttributesAction: Saving attributes");
 				XmlFile xmlFile = new XmlFile(FILE_PATH_ATTRIBUTES, ATTRIBUTE_LIST_ROOT_ELEMENT, ATTRIBUTE_LIST_CHILD_ELEMENT);
-				xmlFile.saveXmlFile(getAllItemFromList(attributeListModel));
+				xmlFile.saveXmlFile(getAllItemFromList(attributesListModel));
 			}
 		});
 
-		attributeListModel = new DefaultListModel();
+		attributesListModel = new DefaultListModel();
 		attributesPane = new JScrollPane();
 		attributesPane.setLocation(SPACE_FROM_BORDER, SPACE_FROM_BORDER);
 		attributesPane.setSize(LIST_WIDTH, LIST_HEIGHT);
 		getContentPane().add(attributesPane);
 		attributesList = new JList();
 		attributesPane.setViewportView(attributesList);
-		attributesList.setModel(attributeListModel);
+		attributesList.setModel(attributesListModel);
 		
 		lblAttributeList = new JLabel("Attributes List");
 		lblAttributeList.setHorizontalAlignment(SwingConstants.CENTER);
@@ -126,25 +144,28 @@ public class AttributesList extends JFrame {
 		getContentPane().add(labelTitle);
 		
 		
+		
+		
 
 	}
 
-	
-	public void start(AttributesList form, int xmlType){
-		form.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	public void start(AttributesList form) {
+
+		form.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
 		form.setSize(WINDOW_WIDTH, WINDOWS_HEIGHT);
 		form.setVisible(true);
-		form.setTitle("Edit Attribute List");
+		form.setTitle("Edit Attributes List");
 		form.setResizable(false);
 		XmlFile xmlFile = new XmlFile(FILE_PATH_ATTRIBUTES, ATTRIBUTE_LIST_ROOT_ELEMENT, ATTRIBUTE_LIST_CHILD_ELEMENT);
-		String[] loadPlayers = xmlFile.getChildsNames();
+		String[] loadAttributes = xmlFile.getChildsNames();
 		try {
-			addItemToList(attributeListModel, loadPlayers);
+			addItemToList(attributesListModel, loadAttributes);
 		} catch (NullPointerException npe) {
-			Logger.log("start: Players xml does not exist");
+			Logger.log("start: Attributes xml does not exist");
 		}
-	}
+		
 
+	}
 
 	private void setNewButton(JButton btn, String text, int x, int y) {
 		btn.setBounds(x, y, FIELD_WIDTH, FIELD_HEIGHT);
@@ -179,8 +200,8 @@ public class AttributesList extends JFrame {
 			errorBox("Please enter a value", "Empty Value");
 			return false;
 		}
-		for (int i = 0; i < attributeListModel.size(); i++) {
-			if (itemToAdd.equals(attributeListModel.get(i).toString()
+		for (int i = 0; i < attributesListModel.size(); i++) {
+			if (itemToAdd.equals(attributesListModel.get(i).toString()
 					.toLowerCase())) {
 				Logger.log("addItemList: item - '" + itemToAdd
 						+ "' in textFiled -'" + textFieldAttribute.getName()
@@ -230,7 +251,7 @@ public class AttributesList extends JFrame {
 
 	}
 	public void goBackButton(){
-		backButton = new JButton("Back");
+		backButton = new JButton();
 		setNewButton(backButton, "return", 0, 0);
 		getContentPane().add(backButton);
 		
@@ -241,6 +262,4 @@ public class AttributesList extends JFrame {
 			}
 		});
 	}
-
-
 }

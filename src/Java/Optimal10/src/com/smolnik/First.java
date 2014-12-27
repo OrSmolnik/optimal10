@@ -38,7 +38,7 @@ public class First extends JFrame {
 		btnPlayersList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				PlayersList form = new PlayersList();
-				form.start(form);
+				form.start(form);				
 			}
 		});
 		
@@ -58,8 +58,8 @@ public class First extends JFrame {
 		
 		btnAttributes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				AttributesList form = new AttributesList(XML_TYPE_ATTRIBUTES);
-				form.start(form, XML_TYPE_ATTRIBUTES);
+				AttributesList form = new AttributesList();
+				form.start(form);
 			}
 		});
 		
