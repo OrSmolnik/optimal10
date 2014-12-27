@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -38,6 +39,7 @@ import java.util.Collections;
 import javax.swing.ListSelectionModel;
 
 import static com.smolnik.Consts.*;
+
 import com.smolnik.XmlActionas;
 import com.smolnik.Logger;
 
@@ -52,6 +54,7 @@ public class PlayersList extends JFrame {
 	private JButton buttonSave;
 	private JLabel lblPlayerList;
 	private JButton backButton;
+	private JLabel helpLable;
 
 	public PlayersList() {
 		setTitle("Optimal10");
@@ -67,6 +70,17 @@ public class PlayersList extends JFrame {
 		
 
 		// Initialize
+		helpLable = new JLabel(PLAYER_HELP);
+		helpLable.setOpaque(true);
+		helpLable.setHorizontalAlignment(SwingConstants.RIGHT);
+		helpLable.setVerticalAlignment(SwingConstants.TOP);
+		helpLable.setBackground(Color.WHITE);
+		helpLable.setBorder( BorderFactory.createLineBorder(Color.BLACK, 1));
+		helpLable.setBounds(SPACE_FROM_BORDER, SPACE_FROM_BORDER*3/2 + LIST_HEIGHT,
+				WINDOW_WIDTH-SPACE_FROM_BORDER*2, HELP_HEIGHT);
+		getContentPane().add(helpLable);
+		
+		
 		textFieldPlayer.setBounds(WINDOW_WIDTH - FIELD_WIDTH
 				- SPACE_FROM_BORDER, SPACE_FROM_BORDER * 2, FIELD_WIDTH,
 				FIELD_HEIGHT);

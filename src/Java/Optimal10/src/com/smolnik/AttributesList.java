@@ -9,6 +9,7 @@ import java.awt.GridBagLayout;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 
+import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -27,6 +28,8 @@ import javax.swing.SwingConstants;
 import javax.swing.JList;
 import java.awt.Window.Type;
 import java.awt.Dialog.ModalExclusionType;
+
+import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
@@ -42,7 +45,7 @@ import com.smolnik.XmlActionas;
 import com.smolnik.Logger;
 
 public class AttributesList extends JFrame {
-	private JTextField textFieldAttribute = new JTextField();;
+	private JTextField textFieldAttribute = new JTextField();
 	private JList attributesList;
 	private DefaultListModel attributesListModel;
 	private JScrollPane attributesPane;
@@ -52,6 +55,7 @@ public class AttributesList extends JFrame {
 	private JButton buttonSave;
 	private JLabel lblAttributeList;
 	private JButton backButton;
+	private JLabel helpLable;
 
 	public AttributesList() {
 		setTitle("Optimal10");
@@ -66,7 +70,17 @@ public class AttributesList extends JFrame {
 		getContentPane().setLayout(null);
 		
 
-		// Initialize
+		// Initialize		
+		helpLable = new JLabel(ATTRIBUTE_HELP);
+		helpLable.setOpaque(true);
+		helpLable.setHorizontalAlignment(SwingConstants.RIGHT);
+		helpLable.setVerticalAlignment(SwingConstants.TOP);
+		helpLable.setBackground(Color.WHITE);
+		helpLable.setBorder( BorderFactory.createLineBorder(Color.BLACK, 1));
+		helpLable.setBounds(SPACE_FROM_BORDER, SPACE_FROM_BORDER*3/2 + LIST_HEIGHT,
+				WINDOW_WIDTH-SPACE_FROM_BORDER*2, HELP_HEIGHT);
+		
+		
 		textFieldAttribute.setBounds(WINDOW_WIDTH - FIELD_WIDTH
 				- SPACE_FROM_BORDER, SPACE_FROM_BORDER * 2, FIELD_WIDTH,
 				FIELD_HEIGHT);
@@ -83,6 +97,7 @@ public class AttributesList extends JFrame {
 
 		getContentPane().add(buttonSave);
 		getContentPane().add(textFieldAttribute);
+		getContentPane().add(helpLable);
 		getContentPane().add(buttonRemoveAttribute);
 		getContentPane().add(buttonAddAttribute);
 

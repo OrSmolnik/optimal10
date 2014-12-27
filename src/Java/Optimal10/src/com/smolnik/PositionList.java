@@ -12,6 +12,7 @@ import java.awt.Toolkit;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
@@ -38,6 +39,7 @@ import java.util.Collections;
 import javax.swing.ListSelectionModel;
 
 import static com.smolnik.Consts.*;
+
 import com.smolnik.XmlActionas;
 
 public class PositionList extends JFrame {
@@ -51,6 +53,7 @@ public class PositionList extends JFrame {
 	private JButton buttonSave;
 	private JLabel lblPositionList;
 	private JButton backButton;
+	private JLabel helpLable;
 
 	public PositionList() {
 		setTitle("Optimal10");
@@ -65,6 +68,16 @@ public class PositionList extends JFrame {
 		getContentPane().setLayout(null);
 
 		// Initialize
+		helpLable = new JLabel(POSITION_HELP);
+		helpLable.setOpaque(true);
+		helpLable.setHorizontalAlignment(SwingConstants.RIGHT);
+		helpLable.setVerticalAlignment(SwingConstants.TOP);
+		helpLable.setBackground(Color.WHITE);
+		helpLable.setBorder( BorderFactory.createLineBorder(Color.BLACK, 1));
+		helpLable.setBounds(SPACE_FROM_BORDER, SPACE_FROM_BORDER*3/2 + LIST_HEIGHT,
+				WINDOW_WIDTH-SPACE_FROM_BORDER*2, HELP_HEIGHT);
+		getContentPane().add(helpLable);
+		
 		textFieldPosition.setBounds(WINDOW_WIDTH - FIELD_WIDTH
 				- SPACE_FROM_BORDER, SPACE_FROM_BORDER * 2, FIELD_WIDTH,
 				FIELD_HEIGHT);
