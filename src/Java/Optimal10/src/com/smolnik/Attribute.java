@@ -1,7 +1,5 @@
 package com.smolnik;
 
-import java.util.ArrayList;
-
 public class Attribute {
 	private String _name;
 	private int _value;

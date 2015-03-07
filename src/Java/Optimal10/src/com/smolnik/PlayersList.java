@@ -3,44 +3,23 @@ package com.smolnik;
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JLabel;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.GridBagLayout;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
 
 import javax.swing.DefaultListModel;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import javax.swing.BorderFactory;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.BoxLayout;
-import javax.swing.ListModel;
 
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-import com.jgoodies.forms.factories.FormFactory;
 import java.awt.SystemColor;
 import javax.swing.SwingConstants;
 import javax.swing.JList;
-import java.awt.Window.Type;
-import java.awt.Dialog.ModalExclusionType;
-import javax.swing.border.LineBorder;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
 
-import javax.swing.ListSelectionModel;
 
 import static com.smolnik.Consts.*;
 
-import com.smolnik.XmlActionas;
 import com.smolnik.Logger;
 
 public class PlayersList extends JFrame {

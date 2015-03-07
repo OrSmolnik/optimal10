@@ -140,6 +140,7 @@ public class HungarianAlgorithm {
         result[w] = -1;
       }
     }
+    System.out.println("TEST: result ="+result.toString());
     return result;
   }
 

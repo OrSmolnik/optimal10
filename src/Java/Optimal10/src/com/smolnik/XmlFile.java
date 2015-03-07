@@ -6,13 +6,11 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -68,9 +66,6 @@ public class XmlFile {
 					String childName = childElement.getAttribute("name");
 					
 					Logger.log("XmlFile constractor: Got new child name - " + childName);
-					
-					NodeList attributesNodesList = childNode.getChildNodes();
-					
 					childAttributes = getAllAttributes(childNode);
 					if (!childAttributes.isEmpty()){
 						Logger.log("XmlFile constractor: The node name - " + childName + " has attributes");
@@ -212,7 +207,6 @@ public class XmlFile {
 	private void removeLeftOvers(String[] listData){
 		Logger.log("removeLeftOvers: Removing child not used");
 		Logger.log("removeLeftOvers: Number of child befor removel - " + this.getData().size());
-		ArrayList<XmlChild> newChildList = new ArrayList<XmlChild>();
 		int xmlDataLength = this.getData().size();
 		int listDataLength = listData.length;
 		boolean isNotExist;
@@ -275,7 +269,6 @@ public class XmlFile {
 				Transformer transformer = transformerFactory.newTransformer();
 				DOMSource source = new DOMSource(doc);
 				StreamResult result = new StreamResult(new File(this.getFullPath()));
-				StreamResult console = new StreamResult(System.out);
 				transformer.transform(source, result);
 				Logger.log("XML DOM Created Successfully..");
 				

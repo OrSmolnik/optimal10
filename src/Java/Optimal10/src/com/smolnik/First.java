@@ -6,17 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-import java.awt.BorderLayout;
 import java.awt.SystemColor;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.sql.Time;
-
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.RowSpec;
-
-import com.smolnik.Calculations;;
 
 public class First extends JFrame {
 	
@@ -74,8 +66,8 @@ public class First extends JFrame {
 		
 		btnCalculate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				resultString = Calculations.Calculate();
-				infoBox(resultString,"Result!");
+				ResultForm form = new ResultForm();
+				form.start(form);
 			}
 		});
 	}

@@ -85,7 +85,6 @@ public class XmlChild {
 	
 	public Node getChildNode(Document doc, String childElement){
 		Element child = doc.createElement(childElement);
-		ArrayList<XmlAttribute> attData = new ArrayList<XmlAttribute>();
 		child.setAttribute("name", this.getName());
 		
 		if (this.getData() == null){
